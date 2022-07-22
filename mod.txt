@@ -1,0 +1,26 @@
+1.package.jsonの"dependencies"を下記の通りに書き換える。
+"dependencies": {
+  "@testing-library/jest-dom": "^5.16.2",
+  "@testing-library/react": "^11.2.7",
+  "@testing-library/user-event": "^12.8.3",
+  "react": "^17.0.2",
+  "react-beautiful-dnd": "^13.1.0",
+  "react-dom": "^17.0.2",
+  "react-scripts": "5.0.0",
+  "web-vitals": "^0.2.4"
+},
+
+2.package-lock.json及びnode_modulesを削除後、yarn installを実行する。
+3.index.jsを下記の通りに書き換える。(React18での記述が変わっているため。)
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+ 
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById('root')
+);
