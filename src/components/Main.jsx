@@ -8,7 +8,44 @@ const Main = () => {
   const [data, setData] = useState(dummyData);
 
   const onDragEnd = (result) => {
-    console.log(result);
+    // console.log(result);
+    if (!result.destination) return;
+    const { source, destination } = result;
+
+    //動かし始めたcolumnが違うcolumnに移動したら
+    if (source.droppableId !== destination.droppableId) {
+      //動かし始めたcolumnの配列の番号を取得()
+      const sourceColIndex = data.findIndex((e) => e.id === source.droppableId);
+      console.log(sourceColIndex);
+      //動かし終わったcolumnの配列の番号を取得()
+      const destinationColIndex = data.findIndex(
+        (e) => e.id === destination.droppableId
+      );
+      console.log(destinationColIndex);
+
+      const sourseCol = data[sourceColIndex];
+      const destinationCol = data[destinationColIndex];
+
+      //動かし始めたタスクに属していたカラムの中のタスクを全て取得
+      //後でsplice関数でその動かし始めたタスクを削除するため
+      const sourceTask = [...sourseCol.tasks];
+      console.log(sourceTask);
+
+      //動かし終わったタスクに属していたカラムの中のタスクを全て取得
+      //後でsplice関数でその動かし始めたタスクを追加するため
+      const destinationTask = [...destinationCol.tasks];
+      console.log(destinationTask);
+
+      //前のカラムから削除
+      const [removed] = sourceTask.splice(source.index, 1);
+      //後のカラムに追加
+      destinationTask.splice(destination.index, 0, removed);
+
+      data[sourceColIndex].tasks = sourceTask;
+      data[destinationColIndex].tasks = destinationTask;
+
+      setData(data);
+    }
   };
 
   return (
