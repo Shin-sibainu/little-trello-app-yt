@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./Main.css";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import dummyData from "../dummyData";
 import Card from "./card/Card";
@@ -28,6 +27,7 @@ const Main = () => {
 
       //動かし始めたタスクに属していたカラムの中のタスクを全て取得
       //後でsplice関数でその動かし始めたタスクを削除するため
+      //sourceTaskに配列をコピーしておく(破壊操作を後でするため)
       const sourceTask = [...sourseCol.tasks];
       console.log(sourceTask);
 
