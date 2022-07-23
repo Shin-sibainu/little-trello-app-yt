@@ -45,6 +45,19 @@ const Main = () => {
       data[destinationColIndex].tasks = destinationTask;
 
       setData(data);
+    } else {
+      //同じカラム内でタスクの入れ替え。
+      const sourceColIndex = data.findIndex((e) => e.id === source.droppableId);
+      const sourseCol = data[sourceColIndex];
+      console.log(sourseCol);
+      const sourceTask = [...sourseCol.tasks];
+      console.log(sourceTask);
+      const [removed] = sourceTask.splice(source.index, 1);
+      sourceTask.splice(destination.index, 0, removed);
+
+      data[sourceColIndex].tasks = sourceTask;
+
+      setData(data);
     }
   };
 
